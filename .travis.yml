@@ -15,4 +15,4 @@ script:
 # build image
 - docker build -t icemanaf/rpi-arm-test:build .
 # test image
-- docker run icemanaf/rpi-arm-test:build uname -a
+- sudo docker run icemanaf/rpi-arm-test:build uname -a
