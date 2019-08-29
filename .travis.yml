@@ -16,4 +16,4 @@ script:
 # build image
 - docker build -t icemanaf/rpi-arm-test:build .
 # test image
-- sudo docker run icemanaf/rpi-arm-test:build uname -a
+- sudo docker run -v /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static --rm icemanaf/rpi-arm-test:build uname -a
