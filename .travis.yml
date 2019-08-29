@@ -1,13 +1,10 @@
 sudo: required
 services:
 - docker
-before-install:
-- sudo apt-get update
-- sudo apt-get install qemu-user-static
 language: bash
 script:
 # prepare qemu
-#- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # get qemu-arm-static binary
 - mkdir tmp
 - >
