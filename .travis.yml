@@ -2,6 +2,8 @@ sudo: required
 services:
 - docker
 language: bash
+env:
+- TAG="icemanaf/rpi-arm-test"
 script:
 # prepare qemu
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -14,11 +16,17 @@ script:
   popd
 - docker ps 
 # build image
-- docker build -t icemanaf/rpi-arm-test:build .
+- docker build -t $TAG .
 # test image
-- sudo docker run --privileged --rm icemanaf/rpi-arm-test:build uname -a
+- sudo docker run --privileged --rm $TAG uname -a
 # push to docker
 - echo $TRAVIS_TAG
 - echo $TRAVIS_BRANCH
+- echo $TRAVIS_BUILD_NUMBER
 #Login to Docker Hub
-- docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+- >
+  if [$TRAVIS_BRANCH=="master"];
+    docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+    docker tag $TAG $TAG:$TRAVIS_BUILD_NUMBER
+    docker push $TAG:$TRAVIS_BUILD_NUMBER
+  fi
