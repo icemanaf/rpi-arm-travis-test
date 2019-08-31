@@ -18,5 +18,7 @@ script:
 # test image
 - sudo docker run --privileged --rm icemanaf/rpi-arm-test:build uname -a
 # push to docker
-echo $TRAVIS_TAG
-echo $TRAVIS_BRANCH
+- echo $TRAVIS_TAG
+- echo $TRAVIS_BRANCH
+#Login to Docker Hub
+- docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
