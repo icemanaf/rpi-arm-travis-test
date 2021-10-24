@@ -23,6 +23,7 @@ script:
 - echo $TRAVIS_TAG
 - echo $TRAVIS_BRANCH
 - echo $TRAVIS_BUILD_NUMBER
+
 #Login to Docker Hub
 - >
   if [ $TRAVIS_BRANCH=="master" ];
